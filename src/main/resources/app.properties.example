@@ -1,0 +1,2 @@
+redis.server=redis.hzhou.me
+redis.auth=password

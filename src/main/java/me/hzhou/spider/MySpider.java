@@ -19,8 +19,9 @@ import us.codecraft.webmagic.scheduler.RedisScheduler;
 public class MySpider {
 
 	public static void main(String[] args) {
-		JedisPool pool = new JedisPool(new JedisPoolConfig(), "m.hzhou.me", Protocol.DEFAULT_PORT,
-				Protocol.DEFAULT_TIMEOUT, "password");
+		JedisPool pool = new JedisPool(new JedisPoolConfig(), Prop.INSTANCE.get("redis.server"), Protocol.DEFAULT_PORT,
+				Protocol.DEFAULT_TIMEOUT, Prop.INSTANCE.get("redis.auth"));
+		
 		Spider.create(new GithubRepoPageProcessor())
 				//从https://github.com/code4craft开始抓
 				.addUrl("https://github.com/code4craft")

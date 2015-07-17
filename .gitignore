@@ -59,6 +59,4 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 
-
-
-urls.txt
+src/main/resources/app.properties
