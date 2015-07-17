@@ -26,6 +26,7 @@ public class ImageExtract implements AfterExtractor {
 	@ExtractByUrl
 	private String url = "";
 
+	@Override
 	public void afterProcess(Page page) {
 
 	}

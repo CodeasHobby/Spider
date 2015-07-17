@@ -3,6 +3,8 @@
  */
 package me.hzhou.spider.model;
 
+import java.util.List;
+
 import com.jfinal.plugin.activerecord.Model;
 import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +24,16 @@ public class Image extends Model<Image> {
 		for (String url : ie.getImageUrls()) {
 			try {
 				new Image().setPost(ie.getUrl()).setUrl(url).save();
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
+		}
+	}
+
+	public void persist(String post, List<String> images) {
+		for (String url : images) {
+			try {
+				new Image().setPost(post).setUrl(url).save();
 			} catch (Exception e) {
 				log.error(e.getMessage());
 			}
