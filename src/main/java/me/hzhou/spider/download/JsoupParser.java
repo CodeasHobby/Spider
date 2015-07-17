@@ -3,11 +3,14 @@
  */
 package me.hzhou.spider.download;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import com.google.common.collect.Lists;
 import me.hzhou.spider.model.Image;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -45,6 +48,22 @@ public class JsoupParser {
 		for (String post : posts) {
 			log.info(post);
 			Image.me.persist(post, getImageUrls(post));
+		}
+	}
+
+	public void download(List<Image> images) throws IOException {
+		for (int i = 0; i < images.size(); i++) {
+			Image image = images.get(i);
+			FileUtils.copyURLToFile(new URL(image.getUrl()), new File("download" + File.separator + i + ".jpg"));
+		}
+	}
+
+	public void download() throws IOException {
+		List<Image> images = Image.me.getImageUrls();
+		for (int i = 0; i < images.size(); i++) {
+			Image image = images.get(i);
+			log.info("current: " + i);
+			FileUtils.copyURLToFile(new URL(image.getUrl()), new File("download" + File.separator + i + ".jpg"));
 		}
 	}
 

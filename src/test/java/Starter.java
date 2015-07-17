@@ -30,4 +30,10 @@ public class Starter extends ControllerTestCase<Application> {
 		JsoupParser jp = new JsoupParser("http://sexy.faceks.com");
 		jp.process();
 	}
+
+	@Test
+	public void downloader() throws IOException {
+		JsoupParser jp = new JsoupParser("");
+		jp.download();
+	}
 }

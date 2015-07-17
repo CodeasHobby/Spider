@@ -40,6 +40,10 @@ public class Image extends Model<Image> {
 		}
 	}
 
+	public List<Image> getImageUrls() {
+		return me.find("select url from images");
+	}
+
 	public Image setPost(String post) {
 		this.set("post", post);
 		return this;

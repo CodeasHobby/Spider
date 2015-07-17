@@ -60,3 +60,4 @@ crashlytics.properties
 crashlytics-build.properties
 
 src/main/resources/app.properties
+download/*
