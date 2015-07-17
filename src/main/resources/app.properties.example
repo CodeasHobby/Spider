@@ -1,2 +1,7 @@
 redis.server=redis.hzhou.me
 redis.auth=password
+user-agent=Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36
+
+mysql.url=jdbc:mysql://127.0.0.1/spider?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+mysql.user=root
+mysql.password=root

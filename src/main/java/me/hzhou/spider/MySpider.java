@@ -3,12 +3,15 @@
  */
 package me.hzhou.spider;
 
+import com.jfinal.kit.PropKit;
+import me.hzhou.spider.model.ImageExtract;
+import me.hzhou.spider.pipeline.ImagePipeline;
+import org.apache.log4j.Logger;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.Protocol;
-import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.pipeline.JsonFilePipeline;
-import us.codecraft.webmagic.processor.example.GithubRepoPageProcessor;
+import us.codecraft.webmagic.Site;
+import us.codecraft.webmagic.model.OOSpider;
 import us.codecraft.webmagic.scheduler.RedisScheduler;
 
 /**
@@ -18,20 +21,15 @@ import us.codecraft.webmagic.scheduler.RedisScheduler;
  */
 public class MySpider {
 
-	public static void main(String[] args) {
-		JedisPool pool = new JedisPool(new JedisPoolConfig(), Prop.INSTANCE.get("redis.server"), Protocol.DEFAULT_PORT,
-				Protocol.DEFAULT_TIMEOUT, Prop.INSTANCE.get("redis.auth"));
-		
-		Spider.create(new GithubRepoPageProcessor())
-				//从https://github.com/code4craft开始抓
-				.addUrl("https://github.com/code4craft")
-						//设置Scheduler，使用Redis来管理URL队列
-				.setScheduler(new RedisScheduler(pool))
-						//设置Pipeline，将结果以json方式保存到文件
-				.addPipeline(new JsonFilePipeline("D:\\data\\webmagic"))
-						//开启5个线程同时执行
-				.thread(5)
-						//启动爬虫
-				.run();
+	private static final Logger log = Logger.getLogger(MySpider.class);
+
+	public static void process() {
+		log.debug(PropKit.get("redis.server"));
+
+		JedisPool pool = new JedisPool(new JedisPoolConfig(), PropKit.get("redis.server"), Protocol.DEFAULT_PORT,
+				Protocol.DEFAULT_TIMEOUT, PropKit.get("redis.auth"));
+
+		OOSpider.create(Site.me().setUserAgent(PropKit.get("user-agent")), new ImagePipeline(), ImageExtract.class)
+				.addUrl("http://sexy.faceks.com").setScheduler(new RedisScheduler(pool)).thread(5).run();
 	}
 }
