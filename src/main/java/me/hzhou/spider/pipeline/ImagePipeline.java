@@ -16,10 +16,10 @@ import us.codecraft.webmagic.pipeline.PageModelPipeline;
  */
 public class ImagePipeline implements PageModelPipeline<ImageExtract> {
 
-	private static final Logger log = Logger.getLogger(ImagePipeline.class);
+    private static final Logger log = Logger.getLogger(ImagePipeline.class);
 
-	public void process(ImageExtract imageExtract, Task task) {
-		log.info(imageExtract);
-		Image.me.persist(imageExtract);
-	}
+    public void process(ImageExtract imageExtract, Task task) {
+        log.info(imageExtract);
+        Image.me.persist(imageExtract);
+    }
 }

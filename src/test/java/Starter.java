@@ -7,7 +7,7 @@ import java.io.IOException;
 import com.jfinal.ext.test.ControllerTestCase;
 import me.hzhou.spider.Application;
 import me.hzhou.spider.MySpider;
-import me.hzhou.spider.download.JsoupParser;
+import me.hzhou.spider.download.SexyFaceksParser;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
@@ -27,13 +27,13 @@ public class Starter extends ControllerTestCase<Application> {
 
 	@Test
 	public void getImageUrls2() throws IOException {
-		JsoupParser jp = new JsoupParser("http://sexy.faceks.com");
+		SexyFaceksParser jp = new SexyFaceksParser("http://sexy.faceks.com");
 		jp.process();
 	}
 
 	@Test
 	public void downloader() throws IOException {
-		JsoupParser jp = new JsoupParser("");
+		SexyFaceksParser jp = new SexyFaceksParser("");
 		jp.download();
 	}
 }

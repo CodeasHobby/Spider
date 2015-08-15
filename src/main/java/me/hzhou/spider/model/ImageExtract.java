@@ -20,52 +20,52 @@ import us.codecraft.webmagic.model.annotation.TargetUrl;
 @TargetUrl("http://sexy\\.faceks\\.com/post/\\w+")
 public class ImageExtract implements AfterExtractor {
 
-	@ExtractBy(value = "//a[@class=\"imgclasstag\"]/@bigimgsrc")
-	private List<String> imageUrls;
+    @ExtractBy(value = "//a[@class=\"imgclasstag\"]/@bigimgsrc")
+    private List<String> imageUrls;
 
-	@ExtractByUrl
-	private String url = "";
+    @ExtractByUrl
+    private String url = "";
 
-	@Override
-	public void afterProcess(Page page) {
+    @Override
+    public void afterProcess(Page page) {
 
-	}
+    }
 
-	public List<String> getImageUrls() {
-		return imageUrls;
-	}
+    public List<String> getImageUrls() {
+        return imageUrls;
+    }
 
-	public void setImageUrls(List<String> imageUrls) {
-		this.imageUrls = imageUrls;
-	}
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (!(o instanceof ImageExtract)) {
-			return false;
-		}
-		ImageExtract that = (ImageExtract) o;
-		return Objects.equal(getImageUrls(), that.getImageUrls()) && Objects.equal(getUrl(), that.getUrl());
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ImageExtract)) {
+            return false;
+        }
+        ImageExtract that = (ImageExtract) o;
+        return Objects.equal(getImageUrls(), that.getImageUrls()) && Objects.equal(getUrl(), that.getUrl());
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(getImageUrls(), getUrl());
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getImageUrls(), getUrl());
+    }
 
-	@Override
-	public String toString() {
-		return Objects.toStringHelper(this).add("imageUrls", imageUrls).add("url", url).toString();
-	}
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this).add("imageUrls", imageUrls).add("url", url).toString();
+    }
 }

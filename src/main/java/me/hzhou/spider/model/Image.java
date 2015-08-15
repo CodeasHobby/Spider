@@ -16,53 +16,57 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Image extends Model<Image> {
 
-	private static final Logger log = Logger.getLogger(Image.class);
+    private static final Logger log = Logger.getLogger(Image.class);
 
-	public static final Image me = new Image();
+    public static final Image me = new Image();
 
-	public void persist(@NotNull ImageExtract ie) {
-		for (String url : ie.getImageUrls()) {
-			try {
-				new Image().setPost(ie.getUrl()).setUrl(url).save();
-			} catch (Exception e) {
-				log.error(e.getMessage());
-			}
-		}
-	}
+    public void persist(@NotNull ImageExtract ie) {
+        for (String url : ie.getImageUrls()) {
+            try {
+                new Image().setPost(ie.getUrl()).setUrl(url).save();
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        }
+    }
 
-	public void persist(String post, List<String> images) {
-		for (String url : images) {
-			try {
-				new Image().setPost(post).setUrl(url).save();
-			} catch (Exception e) {
-				log.error(e.getMessage());
-			}
-		}
-	}
+    public void persist(String post, List<String> images) {
+        for (String url : images) {
+            try {
+                new Image().setPost(post).setUrl(url).save();
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        }
+    }
 
-	public List<Image> getImageUrls() {
-		return me.find("select url from images");
-	}
+    public List<Image> getImageUrls() {
+        return me.find("select url from images");
+    }
 
-	public Image setPost(String post) {
-		this.set("post", post);
-		return this;
-	}
+    public List<Image> getImageUrls(boolean flag) {
+        return me.find("select url from images where flag = ?", flag);
+    }
 
-	public Image setUrl(String url) {
-		this.set("url", url);
-		return this;
-	}
+    public Image setPost(String post) {
+        this.set("post", post);
+        return this;
+    }
 
-	public String getPost() {
-		return this.getStr("post");
-	}
+    public Image setUrl(String url) {
+        this.set("url", url);
+        return this;
+    }
 
-	public String getUrl() {
-		return this.getStr("url");
-	}
+    public String getPost() {
+        return this.getStr("post");
+    }
 
-	public Integer getId() {
-		return this.getInt("id");
-	}
+    public String getUrl() {
+        return this.getStr("url");
+    }
+
+    public Integer getId() {
+        return this.getInt("id");
+    }
 }
