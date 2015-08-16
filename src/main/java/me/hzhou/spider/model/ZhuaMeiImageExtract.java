@@ -17,10 +17,11 @@ import us.codecraft.webmagic.model.annotation.TargetUrl;
  *
  * @author hzhou
  */
-@TargetUrl("http://sexy\\.faceks\\.com/post/\\w+")
-public class ImageExtract implements AfterExtractor {
+//@TargetUrl("http://sexy\\.faceks\\.com/post/\\w+")
+@TargetUrl("http://www.zhuamei5.com/home.php\\?mod=space&uid=6&do=album&id=\\d+")
+public class ZhuaMeiImageExtract implements AfterExtractor {
 
-    @ExtractBy(value = "//a[@class=\"imgclasstag\"]/@bigimgsrc")
+    @ExtractBy(value = "//li/a/img/@src")
     private List<String> imageUrls;
 
     @ExtractByUrl
@@ -52,10 +53,10 @@ public class ImageExtract implements AfterExtractor {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ImageExtract)) {
+        if (!(o instanceof ZhuaMeiImageExtract)) {
             return false;
         }
-        ImageExtract that = (ImageExtract) o;
+        ZhuaMeiImageExtract that = (ZhuaMeiImageExtract) o;
         return Objects.equal(getImageUrls(), that.getImageUrls()) && Objects.equal(getUrl(), that.getUrl());
     }
 

@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class Tester {
 
-	private final Logger log = Logger.getLogger(getClass());
+    private final Logger log = Logger.getLogger(getClass());
 
 	@Test
 	public void downloader() throws IOException {

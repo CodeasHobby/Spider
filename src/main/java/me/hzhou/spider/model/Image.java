@@ -20,7 +20,7 @@ public class Image extends Model<Image> {
 
     public static final Image me = new Image();
 
-    public void persist(@NotNull ImageExtract ie) {
+    public void persist(@NotNull ZhuaMeiImageExtract ie) {
         for (String url : ie.getImageUrls()) {
             try {
                 new Image().setPost(ie.getUrl()).setUrl(url).save();

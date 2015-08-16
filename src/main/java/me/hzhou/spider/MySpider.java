@@ -4,8 +4,8 @@
 package me.hzhou.spider;
 
 import com.jfinal.kit.PropKit;
-import me.hzhou.spider.model.ImageExtract;
-import me.hzhou.spider.pipeline.ImagePipeline;
+import me.hzhou.spider.model.ZhuaMeiImageExtract;
+import me.hzhou.spider.pipeline.ZhuaMeiImagePipeline;
 import org.apache.log4j.Logger;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -21,15 +21,19 @@ import us.codecraft.webmagic.scheduler.RedisScheduler;
  */
 public class MySpider {
 
-	private static final Logger log = Logger.getLogger(MySpider.class);
+    private static final Logger log = Logger.getLogger(MySpider.class);
 
-	public static void process() {
-		log.debug(PropKit.get("redis.server"));
+    public static void process() {
+        log.debug(PropKit.get("redis.server"));
 
-		JedisPool pool = new JedisPool(new JedisPoolConfig(), PropKit.get("redis.server"), Protocol.DEFAULT_PORT,
-				Protocol.DEFAULT_TIMEOUT, PropKit.get("redis.auth"));
+        JedisPool pool = new JedisPool(new JedisPoolConfig(), PropKit.get("redis.server"), Protocol.DEFAULT_PORT,
+                Protocol.DEFAULT_TIMEOUT, PropKit.get("redis.auth"));
 
-		OOSpider.create(Site.me().setUserAgent(PropKit.get("user-agent")), new ImagePipeline(), ImageExtract.class)
-				.addUrl("http://sexy.faceks.com").setScheduler(new RedisScheduler(pool)).thread(5).run();
-	}
+        OOSpider.create(Site.me()
+                .setUserAgent(PropKit.get("user-agent")), new ZhuaMeiImagePipeline(), ZhuaMeiImageExtract.class)
+                .addUrl("http://www.zhuamei5.com/home.php?mod=space&uid=6&do=album&id=882")
+                .setScheduler(new RedisScheduler(pool))
+                .thread(5)
+                .run();
+    }
 }
